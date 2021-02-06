@@ -11,6 +11,10 @@ import { CoreModule } from '@app/core.module';
 import { SharedModule } from '@shared/shared.module';
 import { SocialNetModule } from '@modules/socialNet/social-net.module';
 import { MessageViewerModule } from '@modules/message-viewer/message-viewer.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { HttpClient } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 @NgModule({
   declarations: [
@@ -27,9 +31,11 @@ import { MessageViewerModule } from '@modules/message-viewer/message-viewer.modu
     CoreModule,
     SharedModule,
     SocialNetModule,
-    MessageViewerModule
+    MessageViewerModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

@@ -1,1 +1,23 @@
-<p>login works!</p>
+<div>
+    <div>
+      <form [formGroup]="formModel" autocomplete="on" (submit)="onSubmit()">
+        <div>
+          <label for="username">Username</label>
+          <input type="text" formControlName="username" />
+          <div *ngIf="submitted && formModelControls.username.errors">
+            <div *ngIf="formModelControls.username.errors.required">Login jest wymagany</div>
+        </div>
+        </div>
+        <div>
+          <label for="password">Password</label>
+          <input type="password" formControlName="password" />
+          <div *ngIf="submitted && formModelControls.password.errors">
+            <div *ngIf="formModelControls.password.errors.required">Hasło jest wymagane</div>
+          </div>
+        </div>
+        <button type="submit">Zaloguj</button>
+      </form>
+    </div>
+  </div>
+  <div>{{error}}</div>
+  
