@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { INewUser } from 'src/app/data/auth/schema/auth.schema';
+import { INewUser } from 'src/app/data/auth/schema/registration.schema';
 import { RegistrationService } from 'src/app/data/auth/service/registration.service';
 
 @Component({

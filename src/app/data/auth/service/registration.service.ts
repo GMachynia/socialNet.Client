@@ -1,15 +1,17 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { INewUser } from '../schema/auth.schema';
+import { environment } from '@env/*';
+import { INewUser } from '../schema/registration.schema';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RegistrationService {
 
-  constructor() { }
+  constructor(private _httpClient: HttpClient) { }
 
-  registration(user: INewUser): Observable<any>{
-    return of("test");
-  }
+  public registration(userRegistration: INewUser) {
+    return this._httpClient.post<any>(`${environment.apiUrl}/api/User/register`, userRegistration);      
+ }
+
 }

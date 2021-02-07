@@ -1,7 +1,7 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthGuard } from './guard/auth.guard';
-import { TokenInterceptor } from './interceptor/token.interceptor';
+import { TokenInterceptor } from './interceptor/JWT.interceptor';
 import { throwIfAlreadyLoaded } from './guard/module-import.guard';
 import { ErrorInterceptor } from './interceptor/error.interceptor';
 

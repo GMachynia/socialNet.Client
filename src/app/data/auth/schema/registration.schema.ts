@@ -7,9 +7,5 @@ export interface INewUser {
     phoneNumber: string;
 }
 
-export interface IUser {
-    username: string;
-    password: string;
-}
 
 
