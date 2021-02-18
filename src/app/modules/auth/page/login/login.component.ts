@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LoginService } from 'src/app/data/auth/service/login.service';
+import { AuthService, IUserCredentials } from '@app/service/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -9,51 +9,53 @@ import { LoginService } from 'src/app/data/auth/service/login.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  
   formModel: FormGroup;
   loading = false;
   submitted = false;
   returnUrl: string;
-  error = '';
+  error: string = '';
 
   constructor(
-    private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
-    private authenticationService: LoginService
+    private _formBuilder: FormBuilder,
+    private _router: Router,
+    private _authenticationService: AuthService
   ) {
-    // if (this.authenticationService.currentUserValue) {
-    //   this.router.navigate(['/']);
-    // }
+     if (this._authenticationService.currentUserValue) {
+      this._router.navigate(['/main/board']);
+     }
   }
 
   public ngOnInit() {
-    this.formModel = this.formBuilder.group({
+    this.formModel = this._formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
 
-  get formModelControls() { return this.formModel.controls; }
+  public get formModelControls() { return this.formModel.controls; }
 
   public onSubmit() {
     this.submitted = true;
 
-    // stop here if form is invalid
     if (this.formModel.invalid) {
       return;
     }
 
     this.loading = true;
-    this.authenticationService.login(this.formModelControls.username.value)
+    const credentials: IUserCredentials = {
+      password: this.formModelControls.password.value,
+      username: this.formModelControls.username.value
+    }
+    this._authenticationService.login(credentials)
       .subscribe(
-        data => {
-              
+        res => {
+          this._router.navigate(['/main/board']);
         },
-        error => {
-          this.error = error;
+        err => {
+          this.error = err;
           this.loading = false;
         });
-        console.log(this.error);
   }
 
 }
