@@ -4,6 +4,7 @@ export interface INewUser {
     username: string;
     password: string;
     email: string;
+    city: string;
     phoneNumber: string;
 }
 

@@ -4,7 +4,7 @@ import { environment } from '@env/*';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-type IUserCredentials = Pick<IUser, "username" | "password">;
+export type IUserCredentials = Pick<IUser, "username" | "password">;
 interface IUser {
   id: number;
   username: string;
@@ -27,7 +27,7 @@ export class AuthService {
   }
 
   public login(credentials: IUserCredentials) {
-    return this._httpClient.post<any>(`${environment.apiUrl}/api/User/authenticate`, credentials)
+    return this._httpClient.post<any>(`${environment.apiUrl}/api/User/login`, credentials)
       .pipe(tap(user => {
         localStorage.setItem('currentUser', JSON.stringify(user));
         this.currentUserSubject.next(user);
