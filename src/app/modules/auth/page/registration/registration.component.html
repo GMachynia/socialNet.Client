@@ -1,0 +1,76 @@
+<div>
+    <form [formGroup]="formModel" autocomplete="on" (submit)="onSubmit()">
+        <div>
+            <label for="username">Login:</label>
+            <input type="text" formControlName="username" />
+            <div *ngIf="submitted && formModelControls.username.errors">
+                <div *ngIf="formModelControls.username.errors.required">Login jest wymagany</div>
+            </div>
+        </div>
+        <div>
+            <label for="firstName">Imię:</label>
+            <input type="text" formControlName="firstName" />
+            <div *ngIf="submitted && formModelControls.firstName.errors">
+                <div *ngIf="formModelControls.firstName.errors.required">Imię jest wymagane</div>
+            </div>
+        </div>
+        <div>
+            <label for="lastName">Nazwisko:</label>
+            <input type="text" formControlName="lastName" />
+            <div *ngIf="submitted && formModelControls.lastName.errors">
+                <div *ngIf="formModelControls.lastName.errors.required">Nazwisko jest wymagane</div>
+            </div>
+        </div>
+        <div>
+          <label for="city">Miasto:</label>
+          <input type="text" formControlName="city" />
+          <div *ngIf="submitted && formModelControls.city.errors">
+              <div *ngIf="formModelControls.city.errors.required">Miasto jest wymagane</div>
+          </div>
+      </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" formControlName="email" />
+            <div *ngIf="submitted && formModelControls.email.errors">
+                <div *ngIf="formModelControls.email.errors.required">Email jest wymagane</div>
+                <div *ngIf="formModelControls.email.errors.email">Niepoprawny adres email</div>
+            </div>
+        </div>
+        <div>
+            <label for="phoneNumber">Numer Telefonu:</label>
+            <input type="tel" formControlName="phoneNumber" />
+            <div *ngIf="submitted && formModelControls.phoneNumber.errors">
+                <div *ngIf="formModelControls.phoneNumber.errors.required">Numer telefonu jest wymagany</div>
+            </div>
+        </div>
+        <div formGroupName="passwords">
+            <div>
+                <label for="password">Hasło:</label>
+                <input type="password" formControlName="password" />
+                <div *ngIf="submitted && formModelControls.passwords.get('password').errors">
+                    <div *ngIf="formModelControls.passwords.get('password').errors.required">Hasło jest wymagane</div>
+                </div>
+            </div>
+            <div>
+                <label for="confirmPassword">Potwierdź hasło:</label>
+                <input type="password" formControlName="confirmPassword" />
+                <div *ngIf="submitted && formModelControls.passwords.get('confirmPassword').errors">
+                    <div *ngIf="formModelControls.passwords.get('confirmPassword').errors.required">Wymagane potwierdzenie hasła</div>
+                    <div *ngIf="formModelControls.passwords.get('confirmPassword').errors.passwordMissMatch">Hasła różnią się</div>
+                </div>
+            </div>
+        </div>
+        <div formGroupName="terms">
+            <div>
+                <input type="checkbox" formControlName="acceptTerms" />
+                <label for="acceptTerms">Akceptuję warunki użytkowania</label>     
+                    <div *ngIf="submitted && formModelControls.terms.get('acceptTerms').errors">Wymagana akceptacja warunków użytkownania</div>
+            </div>
+        </div>
+        <div>
+            <button type="submit">Wyślij</button>
+        </div>
+    </form>
+  </div>
+  {{error}}
+  
