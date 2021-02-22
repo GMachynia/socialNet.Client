@@ -38,7 +38,6 @@ export class NavComponent implements OnInit, OnDestroy {
       distinctUntilChanged(),
       debounceTime(500),
       takeUntil(this.destroyed$),
-      tap(x=> console.log),
       switchMap(usernameString => usernameString ? this._navService.getUsernamesByString(usernameString): of([])))
       .subscribe(res => this.usernames = res);
   }
