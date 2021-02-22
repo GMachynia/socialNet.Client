@@ -1,0 +1,8 @@
+<div>
+<h1>Imie: {{userProfile?.firstName}} </h1>
+<h1>Nazwisko: {{userProfile?.lastName}} </h1>
+<h1>Data urodzin: {{userProfile?.dateOfBirth}} </h1>
+<h1>Username: {{userProfile?.username}} </h1>
+<h1>Miasto: {{userProfile?.city}} </h1>
+</div>
+<button (click)="onAddFriend()" [disabled]="isFriend" >Dodaj do znajomych</button>
