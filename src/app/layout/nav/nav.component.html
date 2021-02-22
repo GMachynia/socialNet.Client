@@ -1,1 +1,22 @@
-<p>nav works!</p>
+<div>
+    <button [routerLink]="['/main/board']" mat-menu-item>
+        <mat-icon aria-hidden="false" aria-label="socialNet Home Icon">home</mat-icon>
+    </button>
+   
+    <form class="search-username-form">
+        <input type="text"
+               placeholder="Search user by username"
+               [formControl]="formControl"
+               [matAutocomplete]="auto">
+        <mat-autocomplete [panelWidth]="230"  (optionSelected)="onUsernameSelected($event)" #auto="matAutocomplete">
+          <mat-option *ngFor="let username of usernames" [value]="username">
+            <mat-icon aria-hidden="false" aria-label="pictureTest">accessibility</mat-icon> 
+            <mat-icon aria-hidden="false" aria-label="pictureTest">add_box</mat-icon>
+            {{username}}
+          </mat-option>
+        </mat-autocomplete>
+      </form>
+</div>
+<button (click)="onMyProfile()"> Mój profil</button>
+<button (click)="onLogout()">Wyloguj</button>
+<hr>
