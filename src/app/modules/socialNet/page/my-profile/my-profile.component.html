@@ -1,0 +1,22 @@
+<div>
+    <h1>Imie: {{myProfile?.firstName}} </h1>
+    <h1>Nazwisko: {{myProfile?.lastName}} </h1>
+    <h1>Data urodzin: {{myProfile?.dateOfBirth}} </h1>
+    <h1>Username: {{myProfile?.username}} </h1>
+    <h1>Miasto: {{myProfile?.city}} </h1>
+</div>
+<hr>
+<ng-container *ngIf="myProfile?.invitations">
+    <div><h1>Zaproszenia:</h1></div>
+   <ng-container *ngFor="let invitation of myProfile.invitations">
+    <div>{{myProfile.firstName}} {{myProfile?.lastName}} {{myProfile?.username}} 
+        <button (click) = "updateFriendship(invitation, 'approved')">Dodaj znajomego</button>
+        <button (click) = "updateFriendship(invitation, 'rejected')">Odrzuć zaproszenie</button>
+        <button (click) = "updateFriendship(invitation, 'blocked')">Blokuj</button>
+    </div>
+
+   </ng-container>
+   
+</ng-container>
+
+    
