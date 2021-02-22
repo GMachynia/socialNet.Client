@@ -9,7 +9,7 @@
 <ng-container *ngIf="myProfile?.invitations">
     <div><h1>Zaproszenia:</h1></div>
    <ng-container *ngFor="let invitation of myProfile.invitations">
-    <div>{{myProfile.firstName}} {{myProfile?.lastName}} {{myProfile?.username}} 
+    <div>{{invitation.firstName}} {{invitation?.lastName}} {{invitation?.username}} 
         <button (click) = "updateFriendship(invitation, 'approved')">Dodaj znajomego</button>
         <button (click) = "updateFriendship(invitation, 'rejected')">Odrzuć zaproszenie</button>
         <button (click) = "updateFriendship(invitation, 'blocked')">Blokuj</button>
