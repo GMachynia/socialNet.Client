@@ -5,6 +5,7 @@ import { MaterialModule } from './material.module';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -14,6 +15,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
     CommonModule,
     ReactiveFormsModule,
     MaterialModule,
+    RouterModule,
     TranslateModule.forRoot({
       loader: {
           provide: TranslateLoader,
@@ -26,7 +28,8 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
     CommonModule,
     ReactiveFormsModule,
     MaterialModule,
-    TranslateModule
+    TranslateModule,
+    RouterModule
   ]
 })
 export class SharedModule { }

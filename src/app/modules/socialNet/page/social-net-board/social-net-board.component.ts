@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '@app/service/auth.service';
+import { ChatSignalRService } from '@app/service/chat-signal-r.service';
 
 @Component({
   selector: 'app-social-net-board',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SocialNetBoardComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private _chatSignalRService: ChatSignalRService,
+    private _authService: AuthService
+    ) { }
 
   ngOnInit(): void {
+    this._chatSignalRService.getMessage().subscribe(res=> console.log("Response: " + res))
   }
+ 
+  public send(){
+    this._chatSignalRService.sendToAll("dasdsadsadsadas");
+  }
+
 
 }
