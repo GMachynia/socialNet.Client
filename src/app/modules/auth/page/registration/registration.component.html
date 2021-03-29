@@ -1,76 +1,95 @@
-<div>
-    <form [formGroup]="formModel" autocomplete="on" (submit)="onSubmit()">
-        <div>
-            <label for="username">Login:</label>
-            <input type="text" formControlName="username" />
-            <div *ngIf="submitted && formModelControls.username.errors">
-                <div *ngIf="formModelControls.username.errors.required">Login jest wymagany</div>
-            </div>
+<mat-card id="card" style="text-align: center;  margin-top: 2%">
+	<mat-card-title style="color: #320b86">
+    {{ "forms.registration.title" | translate }}
+	</mat-card-title><br>
+<mat-card-content>
+    <form [formGroup]="formModel" autocomplete="off" class="registration-form" (submit)="onSubmit()">
+        <div class="form-group">
+            <mat-form-field appearance="outline" class="registration-field">
+                <mat-label>{{ "forms.shared.username" | translate }}</mat-label>
+                <input type="text" matInput formControlName="username"
+                       placeholder= "{{'forms.shared.username' | translate}}">
+                <mat-error *ngIf="formModelControls.username.errors?.required">
+                  {{ "forms.shared.usernameIs" | translate }} <strong> {{ "forms.shared.required" | translate }} </strong>
+                </mat-error>
+            </mat-form-field>
         </div>
-        <div>
-            <label for="firstName">Imię:</label>
-            <input type="text" formControlName="firstName" />
-            <div *ngIf="submitted && formModelControls.firstName.errors">
-                <div *ngIf="formModelControls.firstName.errors.required">Imię jest wymagane</div>
-            </div>
+        <div class="form-group">
+            <mat-form-field appearance="outline" class="registration-field">
+                <mat-label>{{ "forms.registration.firstName" | translate }}</mat-label>
+                <input type="text" matInput formControlName="firstName"
+                       placeholder="{{'forms.registration.firstName' | translate}}">
+                <mat-error *ngIf="formModelControls.firstName.errors?.required">
+                    {{ "forms.registration.firstNameIs" | translate }} <strong> {{ "forms.shared.required" | translate }} </strong>
+                </mat-error>
+            </mat-form-field>
         </div>
-        <div>
-            <label for="lastName">Nazwisko:</label>
-            <input type="text" formControlName="lastName" />
-            <div *ngIf="submitted && formModelControls.lastName.errors">
-                <div *ngIf="formModelControls.lastName.errors.required">Nazwisko jest wymagane</div>
-            </div>
+        <div class="form-group">
+            <mat-form-field appearance="outline" class="registration-field">
+                <mat-label>{{ "forms.registration.lastName" | translate }}</mat-label>
+                <input type="text" matInput formControlName="lastName"
+                       placeholder="{{'forms.registration.lastName' | translate}}">
+                <mat-error *ngIf="formModelControls.lastName.errors?.required">
+                    {{ "forms.registration.lastNameIs" | translate }} <strong> {{ "forms.shared.required" | translate }} </strong>
+                </mat-error>
+            </mat-form-field>
         </div>
-        <div>
-          <label for="city">Miasto:</label>
-          <input type="text" formControlName="city" />
-          <div *ngIf="submitted && formModelControls.city.errors">
-              <div *ngIf="formModelControls.city.errors.required">Miasto jest wymagane</div>
-          </div>
-      </div>
-        <div>
-            <label for="email">Email:</label>
-            <input type="email" formControlName="email" />
-            <div *ngIf="submitted && formModelControls.email.errors">
-                <div *ngIf="formModelControls.email.errors.required">Email jest wymagane</div>
-                <div *ngIf="formModelControls.email.errors.email">Niepoprawny adres email</div>
-            </div>
+        <div class="form-group">
+            <mat-form-field appearance="outline" class="registration-field">
+                <mat-label>{{ "forms.registration.city" | translate }}</mat-label>
+                <input type="text" matInput formControlName="city"
+                       placeholder="{{'forms.registration.city' | translate}}">
+                <mat-error *ngIf="formModelControls.city.errors?.required">
+                    {{ "forms.registration.cityIs" | translate }} <strong> {{ "forms.shared.required" | translate }} </strong>
+                </mat-error>
+            </mat-form-field>
         </div>
-        <div>
-            <label for="phoneNumber">Numer Telefonu:</label>
-            <input type="tel" formControlName="phoneNumber" />
-            <div *ngIf="submitted && formModelControls.phoneNumber.errors">
-                <div *ngIf="formModelControls.phoneNumber.errors.required">Numer telefonu jest wymagany</div>
-            </div>
+        <div class="form-group">
+            <mat-form-field appearance="outline" class="registration-field">
+                <mat-label>{{ "forms.registration.email" | translate }}</mat-label>
+                <input type="text" matInput formControlName="email"
+                       placeholder="{{'forms.registration.email' | translate}}">
+                <mat-error *ngIf="formModelControls.email.errors?.required">
+                    {{ "forms.registration.emailIs" | translate }} <strong> {{ "forms.shared.required" | translate }} </strong>
+                </mat-error>
+                <mat-error *ngIf="formModelControls.email.errors?.email">
+                    {{ "forms.registration.emailIs" | translate }} <strong> {{ "forms.shared.invalid" | translate }} </strong>
+                </mat-error>
+            </mat-form-field>
         </div>
-        <div formGroupName="passwords">
-            <div>
-                <label for="password">Hasło:</label>
-                <input type="password" formControlName="password" />
-                <div *ngIf="submitted && formModelControls.passwords.get('password').errors">
-                    <div *ngIf="formModelControls.passwords.get('password').errors.required">Hasło jest wymagane</div>
+            <div formGroupName="passwords">
+                <div class="form-group">
+                    <mat-form-field appearance="outline" class="registration-field">
+                        <mat-label>{{ "forms.shared.password" | translate }}</mat-label>
+                        <input type="password" matInput formControlName="password"
+                               placeholder="{{'forms.shared.password' | translate}}">
+                        <mat-error *ngIf="formModelControls.passwords.get('password').errors?.required">
+                            {{ "forms.shared.passwordIs" | translate }} <strong> {{ "forms.shared.required" | translate }} </strong>
+                        </mat-error>
+                        <mat-error *ngIf="formModelControls.passwords.get('password').errors?.pattern">
+                            {{ "forms.registration.passwordRegexError" | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="form-group">
+                    <mat-form-field appearance="outline" class="registration-field">
+                        <mat-label>{{ "forms.registration.repeatPassword" | translate }}</mat-label>
+                        <input type="password" matInput formControlName="confirmPassword"
+                        placeholder="{{'forms.registration.repeatPassword' | translate}}">
+                        <mat-error *ngIf="formModelControls.passwords.get('confirmPassword').errors?.required">
+                            {{ "forms.registration.repeatPasswordIs" | translate }} <strong> {{ "forms.shared.required" | translate }} </strong>
+                        </mat-error>
+                        <mat-error *ngIf="formModelControls.passwords.get('confirmPassword').errors?.required">
+                            {{ "forms.registration.passwords" | translate }} <strong> {{ "forms.shared.vary" | translate }} </strong>
+                        </mat-error>
+                    </mat-form-field>
                 </div>
             </div>
             <div>
-                <label for="confirmPassword">Potwierdź hasło:</label>
-                <input type="password" formControlName="confirmPassword" />
-                <div *ngIf="submitted && formModelControls.passwords.get('confirmPassword').errors">
-                    <div *ngIf="formModelControls.passwords.get('confirmPassword').errors.required">Wymagane potwierdzenie hasła</div>
-                    <div *ngIf="formModelControls.passwords.get('confirmPassword').errors.passwordMissMatch">Hasła różnią się</div>
-                </div>
+                <button mat-stroked-button class="submit-button" type="submit" color="primary" [disabled]="!formModel.valid">{{ "forms.registration.registrationButton" | translate }}</button>
             </div>
-        </div>
-        <div formGroupName="terms">
-            <div>
-                <input type="checkbox" formControlName="acceptTerms" />
-                <label for="acceptTerms">Akceptuję warunki użytkowania</label>     
-                    <div *ngIf="submitted && formModelControls.terms.get('acceptTerms').errors">Wymagana akceptacja warunków użytkownania</div>
-            </div>
-        </div>
-        <div>
-            <button type="submit">Wyślij</button>
-        </div>
-    </form>
-  </div>
-  {{error}}
+        </form>
+</mat-card-content>
+    
+
   

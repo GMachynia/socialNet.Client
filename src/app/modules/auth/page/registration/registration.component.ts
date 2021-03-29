@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 import { INewUser } from 'src/app/data/registration/schema/registration.schema';
 import { RegistrationService } from 'src/app/data/registration/service/registration.service';
 
@@ -30,14 +29,10 @@ export class RegistrationComponent implements OnInit {
           lastName: ['', Validators.required],
           city: ['', Validators.required],
           email: ['', [Validators.required, Validators.email]],
-          phoneNumber: ['', Validators.required],
           passwords: this._formBuilder.group({
-            password: ['', [Validators.required, Validators.minLength(6)]],
+            password: ['', [Validators.required, Validators.pattern('^((?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])|(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[^a-zA-Z0-9])|(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[^a-zA-Z0-9])|(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^a-zA-Z0-9])).{8,}$')]],
             confirmPassword: ['', Validators.required]
-          }, { validator: this.comparePasswords }),
-          terms: this._formBuilder.group({
-            acceptTerms: [false, Validators.requiredTrue]
-          })
+          }, { validator: this.comparePasswords })  
         });
       }
     
@@ -64,7 +59,6 @@ export class RegistrationComponent implements OnInit {
           password: this.formModelControls.passwords.get("password").value
         };
         this.submitted = true;
-        // stop here if form is invalid
         if (this.formModel.invalid) {
           return;
         }

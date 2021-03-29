@@ -1,23 +1,39 @@
-<div>
-    <div>
-      <form [formGroup]="formModel" autocomplete="on" (submit)="onSubmit()">
-        <div>
-          <label for="username">Username</label>
-          <input type="text" formControlName="username" />
-          <div *ngIf="submitted && formModelControls.username.errors">
-            <div *ngIf="formModelControls.username.errors.required">Login jest wymagany</div>
-        </div>
-        </div>
-        <div>
-          <label for="password">Password</label>
-          <input type="password" formControlName="password" />
-          <div *ngIf="submitted && formModelControls.password.errors">
-            <div *ngIf="formModelControls.password.errors.required">Hasło jest wymagane</div>
-          </div>
-        </div>
-        <button type="submit">Zaloguj</button>
-      </form>
+<mat-card id="card" style="text-align: center; margin-top: 5%;">
+	<mat-card-title style="color: #320b86">
+    {{ "forms.login.title" | translate }}
+	</mat-card-title><br>
+<mat-card-content>
+  <form [formGroup]="formModel" autocomplete="on" (submit)="onSubmit()">
+    <div class="form-group">
+      <mat-form-field appearance="outline" class="registration-field">
+        <mat-label>{{ "forms.shared.username" | translate }}</mat-label>
+        <input type="text" matInput formControlName="username"
+               placeholder= "{{'forms.shared.username' | translate}}">
+        <mat-error *ngIf="formModelControls.username.errors?.required">
+          {{ "forms.shared.usernameIs" | translate }} <strong> {{ "forms.shared.required" | translate }} </strong>
+        </mat-error>
+    </mat-form-field>
     </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline" class="registration-field">
+          <mat-label>{{ "forms.shared.password" | translate }}</mat-label>
+          <input type="password" matInput formControlName="password"
+                 placeholder= "{{'forms.shared.password' | translate}}">
+          <mat-error *ngIf="formModelControls.password.errors?.required">
+            {{ "forms.shared.passwordIs" | translate }} <strong> {{ "forms.shared.required" | translate }} </strong>
+          </mat-error>
+      </mat-form-field>
+    </div>
+  <div>
+    <button mat-stroked-button class="submit-button" type="submit" color="primary" [disabled]="!formModel.valid">{{ "forms.login.signInButton" | translate }}</button>
   </div>
+    </form>
+ </mat-card-content>
+
+
+
+
+ 
+ 
   <div>{{error}}</div>
   

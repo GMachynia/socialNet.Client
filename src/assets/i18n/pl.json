@@ -1,3 +1,38 @@
 {
-    "test":"testPl"
+    "testTranslate":"Translacja test!",
+    "forms":{
+        "shared": {
+            "required": "wymagane",
+            "invalid": "niepoprawne",
+            "vary": "różnią się",
+            "username":"Nazwa użytkownika",
+            "usernameIs": "Pole Nazwa użytkownika jest",
+            "password": "Hasło",
+            "passwordIs": "Pole Hasło jest"
+        },
+        "registration":{
+            "firstName": "Imię",
+            "firstNameIs": "Pole Imię jest",
+            "lastName": "Nazwisko",
+            "lastNameIs": "Pole Nazwisko jest",
+            "city":"Miasto",
+            "cityIs": "Pole miasto jest",
+            "telNumber": "Numer telefonu",
+            "telNumberIs": "Pole Numer telefonu jest",
+            "email": "Email",
+            "emailIs": "Pole Email jest",
+            "dateOfBirth": "Data urodzenia",
+            "dateOfBirthIs": "Pole data urodzenia jest",
+            "repeatPassword": "Powtórz hasło",
+            "repeatPasswordIs": "Pole Powtórz hasło jest",
+            "passwords": "Hasła",
+            "passwordRegexError": "Wymagane 3 z 4 założeń: duże litery (A-Z), małe litery (a-z), liczby (0-9) i znaki specjalne (np. !@#$%^&*)",
+            "registrationButton": "Zarejestruj",
+            "title": "Rejestracja"
+        },
+        "login":{
+            "signInButton": "Zaloguj",
+            "title": "Logowanie"
+          }
+    }
 }

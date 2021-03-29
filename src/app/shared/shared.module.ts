@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material.module';
@@ -8,7 +8,9 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { RouterModule } from '@angular/router';
 
 
-
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 @NgModule({
   declarations: [],
   imports: [
@@ -16,12 +18,13 @@ import { RouterModule } from '@angular/router';
     ReactiveFormsModule,
     MaterialModule,
     RouterModule,
-    TranslateModule.forRoot({
+    TranslateModule.forChild({
       loader: {
-          provide: TranslateLoader,
-          useFactory: HttpLoaderFactory,
-          deps: [HttpClient]
-      }
+      provide: TranslateLoader,
+      useFactory: HttpLoaderFactory,
+      deps: [HttpClient]
+    },
+    isolate: false
   })
   ],
   exports: [
@@ -32,8 +35,6 @@ import { RouterModule } from '@angular/router';
     RouterModule
   ]
 })
-export class SharedModule { }
-
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http);
+export class SharedModule { 
 }
+

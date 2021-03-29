@@ -8,10 +8,12 @@ import { SocialNetLayoutComponent } from '@layout/social-net-layout/social-net-l
 import { NavComponent } from '@layout/nav/nav.component';
 import { AuthModule } from '@modules/auth/auth.module';
 import { CoreModule } from '@app/core.module';
-import { SharedModule } from '@shared/shared.module';
+import { HttpLoaderFactory, SharedModule } from '@shared/shared.module';
 import { SocialNetModule } from '@modules/socialNet/social-net.module';
 import { MessageViewerModule } from '@modules/message-viewer/message-viewer.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { HttpClient } from '@angular/common/http';
 
 
 @NgModule({
@@ -30,7 +32,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SharedModule,
     SocialNetModule,
     MessageViewerModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      },
+      isolate : false
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

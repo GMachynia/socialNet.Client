@@ -1,3 +1,38 @@
 {
-  "test":"testEn"
+  "testTranslate":"translationTestEn",
+  "forms":{
+      "shared": {
+          "required": "required",
+          "invalid": "invalid",
+          "vary": "vary",
+          "username":"Username",
+          "usernameIs": "Username field is",
+          "password": "Password",
+          "passwordIs": "Password field is"
+      },
+      "registration":{
+          "firstName": "FirstName",
+          "firstNameIs": "FirstName is",
+          "lastName": "LastName",
+          "lastNameIs": "LastName field is",
+          "city":"City",
+          "cityIs": "City field is",
+          "telNumber": "Telephone number",
+          "telNumberIs": "Telephone number field is",
+          "email": "Email",
+          "emailIs": "Email field is",
+          "dateOfBirth": "Date of birth",
+          "dateOfBirthIs": "Date of birth field is",
+          "repeatPassword": "Repeat password",
+          "repeatPasswordIs": "Repeat password field is",
+          "passwords": "Passwords",
+          "passwordRegexError": "Required 3 of 4 of the following: upper case (A-Z), lower case (a-z), number (0-9) and special character (e.g. !@#$%^&*)",
+          "registrationButton": "Sign up",
+          "title": "Registration"
+      },
+      "login":{
+        "signInButton": "Sign In",
+        "title": "Sign In"
+      }
+  }
 }
