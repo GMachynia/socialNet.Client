@@ -12,6 +12,9 @@
                 <mat-error *ngIf="formModelControls.username.errors?.required">
                   {{ "forms.shared.usernameIs" | translate }} <strong> {{ "forms.shared.required" | translate }} </strong>
                 </mat-error>
+                <mat-error *ngIf="formModelControls.username.errors?.usernameExists">
+                    {{ "forms.shared.usernameIs2" | translate }} <strong> {{ "forms.shared.busy" | translate }} </strong>
+                  </mat-error>
             </mat-form-field>
         </div>
         <div class="form-group">

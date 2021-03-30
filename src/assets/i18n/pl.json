@@ -7,8 +7,10 @@
             "vary": "różnią się",
             "username":"Nazwa użytkownika",
             "usernameIs": "Pole Nazwa użytkownika jest",
+            "usernameIs2": "Nazwa użytkownika jest",
             "password": "Hasło",
-            "passwordIs": "Pole Hasło jest"
+            "passwordIs": "Pole Hasło jest",
+            "busy": "zajęta"
         },
         "registration":{
             "firstName": "Imię",

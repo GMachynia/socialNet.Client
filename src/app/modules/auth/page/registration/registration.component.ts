@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AbstractControl, AsyncValidatorFn, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable, Subject, timer } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, switchMap, switchMapTo } from 'rxjs/operators';
 import { INewUser } from 'src/app/data/registration/schema/registration.schema';
 import { RegistrationService } from 'src/app/data/registration/service/registration.service';
+
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss']
 })
-export class RegistrationComponent implements OnInit {
+export class RegistrationComponent implements OnInit{
   
   formModel: FormGroup;
   loading = false;
@@ -24,7 +27,7 @@ export class RegistrationComponent implements OnInit {
 
     ngOnInit(){
         this.formModel= this._formBuilder.group({
-          username: ['', Validators.required],
+          username: ['', [Validators.required],  [this.usernameValidator()]],
           firstName: ['', Validators.required],
           lastName: ['', Validators.required],
           city: ['', Validators.required],
@@ -72,5 +75,16 @@ export class RegistrationComponent implements OnInit {
               this.error = err;
               this.loading = false;
             });
+      }
+
+      usernameValidator(): AsyncValidatorFn {
+        return (control: AbstractControl): Observable<ValidationErrors | null> => {
+          return timer(500).pipe(
+            switchMapTo(this._registrationService.checkUsernameAvailability(control.value)),
+            map(res => {
+              return res ? { usernameExists: res } : null;
+            })
+          )
+        };
       }
 }

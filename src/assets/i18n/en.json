@@ -7,8 +7,10 @@
           "vary": "vary",
           "username":"Username",
           "usernameIs": "Username field is",
+          "usernameIs2": "Username is",
           "password": "Password",
-          "passwordIs": "Password field is"
+          "passwordIs": "Password field is",
+          "busy": "busy"
       },
       "registration":{
           "firstName": "FirstName",
