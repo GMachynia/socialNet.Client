@@ -1,9 +1,74 @@
-.search-username-form{
-    min-width: 150px;
-    max-width: 500px;
-    width: 100%;
+
+
+.search-user{
+  display: flex;
+  width: 30%;
+  justify-content: center;
+  align-items: center;
+  }
+
+  .search-user input{
+    height: 30px;
+    width: 250px;
+    border-radius: 16px;
+    outline: 0;
   }
   
-  .example-full-width {
-    width: 100%;
+nav {
+  padding-left: 30px;
+  display: flex;
+  align-items: center;
+  min-height: 8vh;
+  background-color:  #000080;
+  font-family: 'Poppins', sans-serif;
+}
+
+.logo{
+  width: 150px;
+  color: white;
+  letter-spacing: 5px;
+  font-size: 22px;
+}
+
+.nav-links{
+  display: flex;
+  justify-content: space-around;
+  width: 35%;
+}
+
+.nav-links li{
+  list-style: none;
+}
+
+.nav-links a {
+  color:white;
+  text-decoration: none;
+  letter-spacing: 3px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.burger div{
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  margin: 5px;
+}
+
+.burger{
+  display: none;
+}
+
+@media screen and (max-width: 1024px){
+  .nav-links{
+    display: flex;
+    justify-content: space-around;
+    width: 60%;
   }
+}
+
+@media screen and (max-width: 768px){
+  body{
+    display: none;
+  }
+}

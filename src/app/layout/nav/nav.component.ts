@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { NavigationEnd, Router } from '@angular/router';
@@ -10,7 +10,8 @@ import { NavService } from 'src/app/data/nav/service/nav.service';
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.scss']
+  styleUrls: ['./nav.component.scss'],
+  encapsulation: ViewEncapsulation.ShadowDom
 })
 export class NavComponent implements OnInit, OnDestroy {
 
