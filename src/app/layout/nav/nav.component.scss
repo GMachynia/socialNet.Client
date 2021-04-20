@@ -250,10 +250,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
-    & input:focus-within{
-      width: 300px;
-    }
     form {
       width: 100%;
     }

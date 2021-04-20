@@ -1,12 +1,10 @@
-import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { MatToolbar } from '@angular/material/toolbar';
 import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from '@app/service/auth.service';
-import { settings } from 'cluster';
-import { Observable, of, Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, startWith, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { of, Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, startWith, switchMap, takeUntil } from 'rxjs/operators';
 import { NavService } from 'src/app/data/nav/service/nav.service';
 
  enum MenuType{
