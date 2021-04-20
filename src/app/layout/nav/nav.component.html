@@ -1,73 +1,47 @@
 
-<nav>
-  <div class="logo"> 
-    <h4>SocialNet</h4>
+<mat-toolbar class="nav_bar">
+  <div class="logo" [routerLink]="['/main/board']">
+    <span>SocialNet</span>
   </div>
   <div class="search-user">
-    <form class="search-username-form">
-      <input type="text"
-             placeholder=" Search user by username"
-             [formControl]="formControl"
-             [matAutocomplete]="auto">
-      <mat-autocomplete [panelWidth]="430"  (optionSelected)="onUsernameSelected($event)" #auto="matAutocomplete">
+    <form>  
+      <span class="fa fa-search" (click)="focusInput()"></span> 
+      <input #searchInput type="text" placeholder="{{ 'nav.sourceInputPlaceholder' | translate }}" [formControl]="formControl" [matAutocomplete]="auto">
+      <mat-autocomplete  (optionSelected)="onUsernameSelected($event)" #auto="matAutocomplete">
         <mat-option *ngFor="let username of usernames" [value]="username">
-          <mat-icon aria-hidden="false" aria-label="supervisor_account">supervisor_account</mat-icon> 
+          <mat-icon aria-hidden="false" aria-label="supervisor_account">supervisor_account</mat-icon>
           {{username}}
         </mat-option>
       </mat-autocomplete>
     </form>
   </div>
-  <ul class="nav-links">
-    <li>
-      <span class="material-icons-outlined">
-        home
-        </span>
-      <a href="#">Home</a>
-    </li>
-    <li>
-      <a href="#">Profile</a>
-    </li>
-    <li>
-      <a href="#">MessagesBox</a>
-    </li>
-    <li>
-      <a href="#">Notification</a>
-    </li>
-  </ul>
-  <div class="burger">
-    <div class="line1"></div>
-    <div class="line2"></div>
-    <div class="line3"></div>
+  <div class="nav-links">
+    <div class="nav-links-link" (click)="handleMenu(menuType.Settings)">
+      <mat-icon aria-hidden="false" aria-label="settings">settings</mat-icon>
+      <div class="settings" [ngClass]="{'hide': !settingsState}">
+         <div class="setting-case">
+            <mat-icon>settings_applications</mat-icon>
+            <h4>{{'nav.menu.settings' | translate}}</h4>
+          </div>
+         <div class="setting-case" (click)="onLogout()">
+          <mat-icon>settings_power</mat-icon>
+          <h4>{{'nav.menu.logOut' | translate}}</h4> 
+         </div>
+      </div>
+    </div>
+    <div class="nav-links-link" (click)="handleMenu(menuType.Messages)">
+      <mat-icon aria-hidden="false" aria-label="message">message</mat-icon>
+      <div class="messages" [ngClass]="{'hide': !messagesState}">
+        <div class="messages-case">
+         </div>
+     </div>
+    </div>
+    <div class="nav-links-link" (click)="handleMenu(menuType.Notifications)">
+      <mat-icon aria-hidden="false" aria-label="notifications_none">notifications_none</mat-icon>
+      <div class="notifications" [ngClass]="{'hide': !notificationsState}">
+        <div class="setting-case">
+         </div>
+     </div>
+    </div>
   </div>
-
-</nav>
-
-
-
-
-
-
-
-
-<!-- <div>
-    <button [routerLink]="['/main/board']" mat-menu-item>
-        <mat-icon aria-hidden="false" aria-label="socialNet Home Icon">home</mat-icon>
-    </button>
-   
-    <form class="search-username-form">
-        <input type="text"
-               placeholder="Search user by username"
-               [formControl]="formControl"
-               [matAutocomplete]="auto">
-        <mat-autocomplete [panelWidth]="230"  (optionSelected)="onUsernameSelected($event)" #auto="matAutocomplete">
-          <mat-option *ngFor="let username of usernames" [value]="username">
-            <mat-icon aria-hidden="false" aria-label="pictureTest">accessibility</mat-icon> 
-            <mat-icon aria-hidden="false" aria-label="pictureTest">add_box</mat-icon>
-            {{username}}
-          </mat-option>
-        </mat-autocomplete>
-      </form>
-</div>
-<button (click)="onMyProfile()"> Mój profil</button>
-<button (click)="onLogout()">Wyloguj</button>
-<hr> -->
+</mat-toolbar>

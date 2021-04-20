@@ -1,5 +1,12 @@
 {
     "testTranslate":"Translacja test!",
+    "nav":{
+        "sourceInputPlaceholder": "Szukaj na SocialNet",
+        "menu":{
+            "logOut": "Wyloguj",
+            "settings": "Ustawienia"
+        }
+    },
     "forms":{
         "shared": {
             "required": "wymagane",

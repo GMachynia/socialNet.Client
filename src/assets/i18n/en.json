@@ -1,5 +1,12 @@
 {
   "testTranslate":"translationTestEn",
+  "nav":{
+    "sourceInputPlaceholder": "Search on SocialNet",
+    "menu":{
+        "logOut": "Log out",
+        "settings": "Settings"
+    }
+},
   "forms":{
       "shared": {
           "required": "required",
