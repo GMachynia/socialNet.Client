@@ -1,6 +1,6 @@
 <mat-card id="card" style="text-align: center; margin-top: 5%;">
-	<mat-card-title style="color: #320b86">
-    {{ "forms.login.title" | translate }}
+	<mat-card-title>
+    <b>{{ "forms.login.title" | translate }}</b> 
 	</mat-card-title><br>
 <mat-card-content>
   <form [formGroup]="formModel" autocomplete="on" (submit)="onSubmit()">
@@ -33,7 +33,4 @@
 
 
 
- 
- 
-  <div>{{error}}</div>
   

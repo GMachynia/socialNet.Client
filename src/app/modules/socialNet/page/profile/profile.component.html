@@ -1,8 +1,13 @@
-<div>
-<h1>Imie: {{userProfile?.firstName}} </h1>
-<h1>Nazwisko: {{userProfile?.lastName}} </h1>
-<h1>Data urodzin: {{userProfile?.dateOfBirth}} </h1>
-<h1>Username: {{userProfile?.username}} </h1>
-<h1>Miasto: {{userProfile?.city}} </h1>
+<div class="profile-container">
+    <div class="profile-image">
+        <img src="../../../../../assets/images/test.jpg" alt="">
+    </div>
+    <div class="profile-info">
+        <h1>Imie: {{userProfile?.firstName}} </h1>
+        <h1>Nazwisko: {{userProfile?.lastName}} </h1>
+        <h1>Data urodzin: {{userProfile?.dateOfBirth}} </h1>
+        <h1>Username: {{userProfile?.username}} </h1>
+        <h1>Miasto: {{userProfile?.city}} </h1>
+    </div>
+    <button (click)="onAddFriend()" class="add-button" [disabled]="isFriend" >Dodaj do znajomych</button>
 </div>
-<button (click)="onAddFriend()" [disabled]="isFriend" >Dodaj do znajomych</button>

@@ -1,1 +1,21 @@
-<button (click)="send()">Wyslij do wszystkich</button>
+<main>
+    <div class="main-container">
+        <div class="new-post">
+            <app-sn-textarea value='' #snText (valChange)="onChange($event)"></app-sn-textarea>
+            <form [formGroup]="formModel" (ngSubmit)="addPost(file.files)"> 
+                <label for="file-input">
+                    <mat-icon class="file-upload" [ngClass]="{'attach-color': file.files[0]}">add_photo_alternate</mat-icon>
+                </label>
+                <input #file id="file-input" type="file" formControlName="file" accept="image/png, image/jpeg" formControlName="image" > 
+                <button class="add-post-button" [ngClass]="{'attach-colorBackground': newPostText || file.files[0]}" type="submit">{{"board.addPost" | translate}}</button>
+            </form>      
+        </div>
+        <ng-container *ngIf="!isFirstLoad">
+            <ng-container  *ngFor="let post of posts">
+                <app-post [post]="post" class="post"></app-post>
+            </ng-container>
+        </ng-container>
+    </div>
+</main>
+
+

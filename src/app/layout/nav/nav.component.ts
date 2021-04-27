@@ -1,8 +1,11 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from '@app/service/auth.service';
+import { environment } from '@env/*';
+import { UserImagePopUpComponent } from '@shared/component/user-image-pop-up/user-image-pop-up.component';
 import { of, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, startWith, switchMap, takeUntil } from 'rxjs/operators';
 import { NavService } from 'src/app/data/nav/service/nav.service';
@@ -24,16 +27,23 @@ export class NavComponent implements OnInit, OnDestroy {
   usernames: string[];
   @ViewChild('searchInput') searchInput: ElementRef;
 
+
   settingsState: boolean = false;
   messagesState: boolean = false;
   notificationsState: boolean = false;
 
+  matDialogRef: MatDialogRef<UserImagePopUpComponent>;
+
   private destroyed$: Subject<boolean> = new Subject<boolean>();
+
+  currentProfileImage: string;
+  defaultProfileImage: string = "../../../assets/images/userIcon.png";
 
   constructor(
     private _navService: NavService,
     private _router: Router,
-    private _authService: AuthService
+    private _authService: AuthService,
+    public _matDialog: MatDialog
     ){}
 
   ngOnInit(): void {
@@ -44,7 +54,11 @@ export class NavComponent implements OnInit, OnDestroy {
          window.scrollTo(0, 0);
       }
   });
-  
+ 
+    this._navService.getUserImage().subscribe(res => {
+      this.currentProfileImage = res.profilePicture ? environment.apiUrl + "/" + res.profilePicture : "../../../../assets/images/userIcon.png";
+    });
+
       this.formControl.valueChanges.pipe(
       startWith(''),
       distinctUntilChanged(),
@@ -103,4 +117,16 @@ export class NavComponent implements OnInit, OnDestroy {
       this.searchInput.nativeElement.focus();
   }
 
-}
+  public setUpImage(){
+    this.matDialogRef = this._matDialog.open(UserImagePopUpComponent, {
+      data: { profileImage: this.currentProfileImage },
+      disableClose: true
+    });
+    this.matDialogRef.afterClosed().subscribe(res => {
+      if (res) {
+       this.currentProfileImage = res.profileImageChanged;
+      }
+    });
+  }
+  }
+

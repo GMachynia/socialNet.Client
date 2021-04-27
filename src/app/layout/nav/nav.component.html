@@ -1,4 +1,4 @@
-
+<nav>
 <mat-toolbar class="nav_bar">
   <div class="logo" [routerLink]="['/main/board']">
     <span>SocialNet</span>
@@ -16,6 +16,7 @@
     </form>
   </div>
   <div class="nav-links">
+    <img (click)="setUpImage()" class="userImage" [src]="currentProfileImage || defaultProfileImage">
     <div class="nav-links-link" (click)="handleMenu(menuType.Settings)">
       <mat-icon aria-hidden="false" aria-label="settings">settings</mat-icon>
       <div class="settings" [ngClass]="{'hide': !settingsState}">
@@ -45,3 +46,4 @@
     </div>
   </div>
 </mat-toolbar>
+</nav>

@@ -1,0 +1,66 @@
+.main-container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.post{
+    border: 0.25px solid white;
+    margin-top: 20px;
+    width: 46%;
+    background-color: #6495ED;
+    border-radius: 12px;
+}
+
+@media screen and (max-width: 768px) {
+    .post{
+        width: 90%;
+    }
+}
+
+:host::ng-deep{
+     .new-post{
+        padding: 10px;
+        background-color: #6495ED;
+        border: 0.25px solid white;
+        border-radius: 15px;
+         & form{
+             display: flex;
+             align-items: flex-start;
+             justify-content: space-between;
+             & .add-post-button{
+                outline: 0;
+                background-color: #1E90FF;
+                border: 0.25px solid white;
+                border-radius: 15px;
+                color: white;
+             }
+         }
+
+      textarea.autosize{
+      width: 30vw;
+      }
+      @media screen and (max-width: 768px) {
+        textarea.autosize{
+            width: 80vw;
+            }
+      }
+    }
+    }
+
+    
+
+input {
+display: none;
+}
+
+.file-upload{
+    color: white;
+  
+}
+.attach-color{
+    color: green;
+}
+.attach-colorBackground{
+    background-color: green !important;
+}

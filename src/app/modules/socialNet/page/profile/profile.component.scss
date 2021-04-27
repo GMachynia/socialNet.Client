@@ -1,0 +1,25 @@
+.profile-container{
+    margin-top: 20px;
+    display:flex;
+    justify-content: center;
+  
+    & .profile-image{
+        & img{
+            height: 250px;
+            width: 250px;
+            border: 0.25 solid white;
+            border-radius: 125px;
+        }
+    }
+    & .profile-info{
+        color: white;
+        padding-left: 50px;
+    }
+
+    & .add-button{
+        margin-left: 20px;
+        border: 0.25 solid white;
+        border-radius: 15px;
+    }
+}
+

@@ -11,12 +11,10 @@ export class ChatSignalRService {
 
   private messageReceived = new EventEmitter<any>();
   private messageReceivedFromUser = new EventEmitter<any>();
-  private connectionEstablished = new EventEmitter<Boolean>();
   private _hubConnection: HubConnection;
 
   constructor(private _authService: AuthService) {
-    this.startConnection();
-    this.receiveMessage();
+
    }
   
   public getMessage(): Observable<any>{
@@ -53,21 +51,22 @@ export class ChatSignalRService {
     this._hubConnection.invoke('SendToGroup', groupName);
   }
 
-  private receiveMessage = (): void => {
+  public receiveMessage = (): void => {
     this._hubConnection.on('ReceiveMessageToAll', (data: any) => {
       this.messageReceived.emit(data);
     });
   }
 
-  private startConnection = () => {
+  public startConnection = () => {
     this._hubConnection = new HubConnectionBuilder()
-                            .withUrl(`${environment.apiUrl}/signalR/chat`,
+                            .withUrl(`${environment.apiUrl}/signalR/chat`, 
                             {
+                              //headers: { "Content-Type": "application/json; charset=utf-8" },
                               accessTokenFactory: ()=> this._authService.currentUserTokenValue
                             }
                             )
-                            .build();     
-               
+                            .build();   
+
     this._hubConnection
       .start()
       .then(() => console.log('SignalR Chat: Connection started'))
@@ -75,7 +74,9 @@ export class ChatSignalRService {
   }
 
   public stopConnection(){
-    this._hubConnection.stop();
+    this._hubConnection.stop()
+    .then(() => console.log('SignalR Chat: Connection stopped'))
+    .catch(err => console.log('SignalR Chat: Error while stoping connection: ' + err))
   }
 
 }

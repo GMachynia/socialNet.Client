@@ -58,7 +58,6 @@ export class RegistrationComponent implements OnInit{
           lastName: this.formModelControls.lastName.value,
           firstName: this.formModelControls.firstName.value,
           email: this.formModelControls.email.value,
-          phoneNumber: this.formModelControls.phoneNumber.value,
           password: this.formModelControls.passwords.get("password").value
         };
         this.submitted = true;

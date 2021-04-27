@@ -1,0 +1,16 @@
+<div class="container">
+    <div class="imageBox" *ngIf="currentProfileImage">
+        <img  [src]="currentProfileImage">
+    </div>
+    <div class="button-container">
+        <form [formGroup]="formModel" (ngSubmit)="setImage(myFile.files[0])"> 
+        <label for="file-pop-up">
+            <mat-icon class="file-upload" [ngClass]="{'attach': myFile.files[0]}">add_photo_alternate</mat-icon>
+        </label>
+        <input #myFile id="file-pop-up" type="file"  accept="image/png, image/jpeg" (change)="change(myFile.files[0])" > 
+        <button class="add-button" type="submit" [ngClass]="{'attachBack':  myFile.files[0]}" [disabled]="!myFile.files[0]">{{'acceptButton' | translate}}</button>
+        <button class="cancel-button" (click)="closeDialog()">{{'cancelButton' | translate}}</button>
+        </form>
+    </div>
+</div>
+

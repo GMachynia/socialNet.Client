@@ -4,7 +4,7 @@ import { AuthGuard } from './guard/auth.guard';
 import { throwIfAlreadyLoaded } from './guard/module-import.guard';
 import { ErrorInterceptor } from './interceptor/error.interceptor';
 import { JWTInterceptor } from './interceptor/JWT.interceptor';
-import { BasicInterceptor } from './interceptor/basic.interceptor';
+
 
 
 @NgModule({
@@ -19,11 +19,6 @@ import { BasicInterceptor } from './interceptor/basic.interceptor';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorInterceptor,
-      multi: true
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: BasicInterceptor,
       multi: true
     }
   ]

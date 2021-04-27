@@ -1,27 +1,63 @@
 <div class="post-container">
     <div class="post-content">
-        <div class="post-description">
-
+        <div class="post-owner">
+            <div>
+                <img [src]="partOfUrl+post.profilePicture || defaultProfilePicture">
+            </div>
+            <div class="owner">
+                <span class="username">{{post?.username}}</span>
+                <span class="when">34 min temu</span>
+            </div>
         </div>
-        <div class="post-image">
-
+        <div class="post-description" (click)="showMore=!showMore" [ngClass]="{'hideText': !showMore}">
+            <p>
+               {{post?.postContent}}
+            </p>
         </div>
-    </div>
-    <div class="post-coments">
-
-    </div>
-    <div class="comments-box">
-
-    </div>
-    <div class="new-comment-box">
-        <mat-form-field>
-            <mat-label>Dodaj nowy komentarz</mat-label>
-            <textarea matInput
-                      cdkTextareaAutosize
-                      #autosize="cdkTextareaAutosize"
-                      cdkAutosizeMinRows="1"
-                      cdkAutosizeMaxRows="5"></textarea>
-          </mat-form-field>
+        
+        <div *ngIf="post?.postImage" class="post-image">
+            <img [src]="postImage" class="post-image">
+        </div>
+        <div class="comments-amount">
+            <h4>{{post?.comments.length}} {{"post.comments" | translate}}</h4>
+        </div>
+        <br>
+        <hr>
+        
+        <div *ngIf="post?.comments.length > 0" class="comments-area">
+            <ng-container *ngIf="!showMore; else moreComments">
+                <div class="comment">
+                    <span> {{post?.comments[0].commentOwner}} </span>
+                     <p>{{post?.comments[0].content}}</p>
+                     <span> {{post?.comments[0].commentDateTime}} </span>
+                </div>
+                <div *ngIf="post?.comments[1]" class="comment">
+                    <span> {{post?.comments[1].commentOwner}} </span>
+                     <p>{{post?.comments[1].content}}</p>
+                     <span> {{post?.comments[1].commentDateTime}} </span>
+                </div>
+                <span *ngIf="post?.comments.length > 2 && !showMore" class="more-less"  (click)="showMore = !showMore"> {{"post.showMore" | translate}} </span>
+            </ng-container>
+            
+            <ng-template #moreComments>
+                <ng-container *ngFor="let comment of post?.comments">
+                    <div class="comment">
+                        <span> {{comment.commentOwner}} </span>
+                        <p>{{comment.content}}</p>
+                        <span> {{comment.commentDateTime}} </span>
+                    </div>       
+            </ng-container>
+            <span class="more-less" (click)="showMore = !showMore"> {{"post.showLess" | translate}} </span>
+            </ng-template>
+           
+        </div>
+        <div class="add-comment-box">
+            <app-sn-textarea value='' #snText (valChange)="onChange($event)"></app-sn-textarea>
+            <div class="send" (click)="sendComment()">
+                 <mat-icon>send</mat-icon>
+            </div>      
+        </div>
     </div>
 </div>
+
 

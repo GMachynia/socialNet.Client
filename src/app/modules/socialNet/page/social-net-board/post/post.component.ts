@@ -1,20 +1,49 @@
-import { CdkTextareaAutosize } from '@angular/cdk/text-field';
-import { Component, Input, NgZone, OnInit, ViewChild } from '@angular/core';
-import { take } from 'rxjs/operators';
+
+import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { AuthService } from '@app/service/auth.service';
+import { environment } from '@env/*';
+import { SnTextareaComponent } from '@shared/component/sn-textarea/sn-textarea.component';
+import { IComment, IPost } from 'src/app/data/new-post/schema/new-post.schema';
 
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.scss']
 })
-export class PostComponent {
-  constructor(private _ngZone: NgZone) {}
-  @Input('postData') postContent: any;
-  @ViewChild('autosize') autosize: CdkTextareaAutosize;
+export class PostComponent implements OnChanges, OnInit{
+  showMore: boolean = false;
+  defaultProfilePicture: string = "../../../../../../assets/images/userIcon.png";
+  partOfUrl: string = environment.apiUrl + "/";
+  postImage: string;
+  commentText: string;
+  commentOwner: string;
+  @Input('post') post: IPost;
+  @ViewChild('snText') snText: SnTextareaComponent;
 
-  triggerResize() {
-    this._ngZone.onStable.pipe(take(1))
-        .subscribe(() => this.autosize.resizeToFitContent(true));
+  constructor(private _authService: AuthService) {}
+  ngOnInit(): void {
+   this.commentOwner = this._authService.currentUsernameValue;
   }
+
+  ngOnChanges(): void {
+    this.postImage = this.partOfUrl + this.post.postImage;
+  }
+
+  public onChange(commentContent){
+    this.commentText = commentContent;
+  }
+
+  public sendComment(){
+    const newComment: IComment = {
+    content: this.commentText,
+    commentOwner: this.commentOwner,
+    commentDateTime: new Date().toLocaleDateString()
+    }
+    this.post.comments.push(newComment);
+    this.commentText = '';
+    this.snText.clean();
+  }
+
+
 }
 

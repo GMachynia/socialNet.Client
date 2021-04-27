@@ -5,7 +5,6 @@ export interface INewUser {
     password: string;
     email: string;
     city: string;
-    phoneNumber: string;
 }
 
 

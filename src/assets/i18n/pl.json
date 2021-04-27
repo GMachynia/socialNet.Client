@@ -1,5 +1,15 @@
 {
     "testTranslate":"Translacja test!",
+    "acceptButton": "Zatwierdź",
+    "cancelButton": "Anuluj",
+    "board": {
+    "addPost": "Dodaj post"
+    },
+    "post":{
+    "showMore": "Pokaż więcej",
+    "showLess": "Pokaż mniej",
+    "comments": "komentarzy"
+    },
     "nav":{
         "sourceInputPlaceholder": "Szukaj na SocialNet",
         "menu":{
@@ -43,5 +53,7 @@
             "signInButton": "Zaloguj",
             "title": "Logowanie"
           }
+        
+        
     }
 }

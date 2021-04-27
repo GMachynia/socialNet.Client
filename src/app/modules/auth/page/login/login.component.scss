@@ -9,3 +9,26 @@
 .submit-button{
     width: 20%;
 }
+
+mat-card{
+    background-color: #6495ED;
+    border: 0.25px solid white;
+}
+
+mat-card-title{
+    color: white;
+    letter-spacing: 1px;
+    font-family: "Poppins", sans-serif;
+    font-size: bold;
+    padding-bottom: 20px;
+    
+}
+
+.submit-button{
+    color: white;
+    border: 0.25px solid white;
+
+    &:hover{
+        background-color: #1E90FF;
+    }
+}

@@ -1,0 +1,117 @@
+.post-owner{
+    padding-top: 7px;
+    padding-left: 7px;
+    display:flex;
+    align-items: center;
+
+    & .username{
+        color: white;
+        padding-left: 7px;
+        margin: 0;
+        padding: 0;
+        font-size: 20px;
+    } 
+
+    & .when{
+        margin:0;
+        font-size: 12px;
+        padding-left: 7px;
+    }
+    & img{
+        width: 36px;
+        height: 36px;
+        border: 0.25px solid white;
+        border-radius: 18px;
+    }
+
+    & .owner{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.post-description{
+    & p{
+        color: white;
+        padding-left: 7px;
+        font-size: 15px;
+        line-height: 25px;
+        &:hover{
+            background-color: #1E90FF;
+            border-radius: 15px;
+        }
+    }
+}
+.post-image{
+    width: 100%;
+}
+
+.comments-amount{
+    padding-top: 4px;
+    float: right;
+    padding-right: 10px;
+    color: white;
+    &:hover{
+        text-decoration: underline;
+    }
+}
+
+.hideText{
+    & p{
+        display: -webkit-box;
+        max-height: 75px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+    }
+
+}
+
+.add-comment-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    & mat-icon{
+        color: #004371;
+    }
+    & .autosize{
+        width: 500px !important;
+        background-color: red;
+    }
+    & .send{
+        outline: 0;
+    }
+}
+
+
+:host::ng-deep{
+     textarea.autosize{
+     width: 100% !important;
+     }
+     app-sn-textarea{
+         width: 90%;
+     }
+}
+
+.comment{
+    width: 70%;
+    background-color:  #004371;
+    border-radius: 25px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    & span, p {
+        margin-left: 20px;
+        color: white;
+    }
+    & span:nth-child(1){
+        font-weight: bold;
+        font-size: 16px;
+    }
+}
+
+.more-less{
+    margin-left: 20px;
+}

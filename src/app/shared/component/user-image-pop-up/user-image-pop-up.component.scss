@@ -1,0 +1,85 @@
+.container {
+    width: 35vw;
+    height: 35vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.imageBox{
+    border: 0.25px solid blue;
+    border-radius: 60px;
+    overflow: hidden;
+    height: 120px;
+    width: 120px;
+    display: flex;
+    & img{
+        height: 120px;
+        width: 120px;
+        background-size: cover;
+        background-position: center;
+    }
+    
+}
+
+@media screen and (max-width: 768px) {
+    .imageBox{
+        border: 0.25px solid blue;
+        border-radius: 33px;
+        overflow: hidden;
+        height: 66px;
+        width: 66px;
+        & img{
+            height: 66px;
+            width: 66px;
+            background-size: cover;
+            background-position: center;
+        }
+    }
+}
+
+
+
+.button-container form{
+
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+input {
+    display: none;
+    }
+
+    .add-button{
+        background-color: #1E90FF;
+        border: 0.25px solid white;
+        border-radius: 15px;
+        color: white;
+        outline: 0;
+     }
+
+     .cancel-button{
+        background-color: #1E90FF;
+        border: 0.25px solid white;
+        border-radius: 15px;
+        color: white;
+        outline: 0;
+     }
+
+     .attachBack{
+        background-color: green;
+    }
+
+    .file-upload{
+        color: blue;
+      
+    }
+    .attach{
+        color: green;
+    }
+   

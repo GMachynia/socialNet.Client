@@ -1,4 +1,3 @@
-import { Byte } from "@angular/compiler/src/util";
 import { IUserProfile } from "../../profile/schema/profile.schema";
 
 export interface IMyProfile extends IUserProfile{

@@ -1,5 +1,15 @@
 {
   "testTranslate":"translationTestEn",
+  "acceptButton": "Accept",
+  "cancelButton": "Cancel",
+  "board": {
+    "addPost": "Add post"
+    },
+  "post":{
+    "showMore": "Show more",
+    "showLess": "Show less",
+    "comments": "comments"
+    },
   "nav":{
     "sourceInputPlaceholder": "Search on SocialNet",
     "menu":{
