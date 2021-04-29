@@ -34,7 +34,6 @@
                 <div *ngIf="post?.comments[1]" class="comment">
                     <span> {{post?.comments[1].commentOwner}} </span>
                      <p>{{post?.comments[1].content}}</p>
-                     <span> {{post?.comments[1].commentDateTime}} </span>
                 </div>
                 <span *ngIf="post?.comments.length > 2 && !showMore" class="more-less"  (click)="showMore = !showMore"> {{"post.showMore" | translate}} </span>
             </ng-container>
@@ -44,7 +43,6 @@
                     <div class="comment">
                         <span> {{comment.commentOwner}} </span>
                         <p>{{comment.content}}</p>
-                        <span> {{comment.commentDateTime}} </span>
                     </div>       
             </ng-container>
             <span class="more-less" (click)="showMore = !showMore"> {{"post.showLess" | translate}} </span>

@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ChatSignalRService } from '@app/service/chat-signal-r.service';
+import { SocialNetSignalRService } from '@app/service/social-net-signal-r.service';
 
 @Component({
   selector: 'app-social-net-layout',
@@ -8,15 +8,18 @@ import { ChatSignalRService } from '@app/service/chat-signal-r.service';
 })
 export class SocialNetLayoutComponent implements OnInit, OnDestroy {
 
-  constructor(private _chatSignalRService: ChatSignalRService) { }
+  constructor(private _signalRService: SocialNetSignalRService,
+) { }
 
 
   ngOnInit(): void {
-    this._chatSignalRService.startConnection();
-    this._chatSignalRService.receiveMessage();
+    this._signalRService.startConnection();
+    this._signalRService.getNewPostNotification();
+    this._signalRService.getNewCommentNotification();
+
   }
 
   ngOnDestroy(): void {
-    this._chatSignalRService.stopConnection();
+    this._signalRService.stopConnection();
   }
 }

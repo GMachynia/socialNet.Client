@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@env/*';
 import { Observable } from 'rxjs';
-import { INewPost, IPost } from '../schema/new-post.schema';
+import { INewComment, INewPost, IPost } from '../schema/new-post.schema';
 
 
 @Injectable({
@@ -25,5 +25,8 @@ export class NewPostService {
     return this._httpClient.get<IPost[]>(`${environment.apiUrl}/api/Post/getPosts?page=${page}&pageSize=${pageSize}`);      
   }
 
+  public addComment(newComment: INewComment): Observable<boolean> {
+    return this._httpClient.post<boolean>(`${environment.apiUrl}/api/Comment/addComment`, newComment);      
+  }
   
 }

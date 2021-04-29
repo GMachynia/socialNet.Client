@@ -3,7 +3,8 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@
 import { AuthService } from '@app/service/auth.service';
 import { environment } from '@env/*';
 import { SnTextareaComponent } from '@shared/component/sn-textarea/sn-textarea.component';
-import { IComment, IPost } from 'src/app/data/new-post/schema/new-post.schema';
+import { IComment, INewComment, IPost } from 'src/app/data/new-post/schema/new-post.schema';
+import { NewPostService } from 'src/app/data/new-post/service/new-post.service';
 
 @Component({
   selector: 'app-post',
@@ -20,7 +21,8 @@ export class PostComponent implements OnChanges, OnInit{
   @Input('post') post: IPost;
   @ViewChild('snText') snText: SnTextareaComponent;
 
-  constructor(private _authService: AuthService) {}
+  constructor(private _authService: AuthService,
+    private _postService: NewPostService) {}
   ngOnInit(): void {
    this.commentOwner = this._authService.currentUsernameValue;
   }
@@ -34,14 +36,14 @@ export class PostComponent implements OnChanges, OnInit{
   }
 
   public sendComment(){
-    const newComment: IComment = {
+    const newComment: INewComment = {
     content: this.commentText,
-    commentOwner: this.commentOwner,
-    commentDateTime: new Date().toLocaleDateString()
+    postId: this.post.postId
     }
-    this.post.comments.push(newComment);
-    this.commentText = '';
-    this.snText.clean();
+    this._postService.addComment(newComment).subscribe(()=>{
+      this.commentText = '';
+      this.snText.clean();
+    })
   }
 
 

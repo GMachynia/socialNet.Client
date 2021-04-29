@@ -2,12 +2,13 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup} from '@angular/forms';
 import { AuthService } from '@app/service/auth.service';
-import { ChatSignalRService } from '@app/service/chat-signal-r.service';
+import { SocialNetSignalRService } from '@app/service/social-net-signal-r.service';
 import { SnTextareaComponent } from '@shared/component/sn-textarea/sn-textarea.component';
 import { fromEvent, Observable, Subject} from 'rxjs';
 import { concatMap, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { IPost } from 'src/app/data/new-post/schema/new-post.schema';
 import { NewPostService } from 'src/app/data/new-post/service/new-post.service';
+import { threadId } from 'worker_threads';
 
 @Component({
   selector: 'app-social-net-board',
@@ -38,6 +39,7 @@ export class SocialNetBoardComponent implements OnInit, OnDestroy {
     private _authService: AuthService,
     private _formBuilder: FormBuilder,
     private _newPostService: NewPostService,
+    private _signalRService: SocialNetSignalRService,
     ) { 
       this.scrollEvent$ = fromEvent(window, 'scroll').pipe(
         takeUntil(this.destroy$),
@@ -47,11 +49,15 @@ export class SocialNetBoardComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
+    this._signalRService.getNewPostNotification$().subscribe(res => {
+      this.posts.unshift(res);
+    });
+
     this.formModel = this._formBuilder.group({
       image: null
     });
     this.currentUsername = this._authService.currentUsernameValue;
-    //this._chatSignalRService.getMessage().subscribe(res=> console.log("Response: " + res));
+   
     this.getPosts();
     this.scrollEvent$.subscribe(() => {
       if ((window.scrollY) >= document.body.offsetHeight) {
@@ -117,6 +123,8 @@ export class SocialNetBoardComponent implements OnInit, OnDestroy {
         this.formModelControls.image.reset();
         this.textArea.clean();
       }
+
+      
 }
 
 

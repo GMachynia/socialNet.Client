@@ -9,12 +9,16 @@ export interface IPost{
     postId: number,
     postContent: string,
     postImage?: string,
-    postDateTime?: Date,
     comments?: IComment[]
 }
 
 export interface IComment{
     content: string,
     commentOwner: string,
-    commentDateTime: string
+    postId: number
+}
+
+export interface INewComment {
+    content: string,
+    postId: number
 }
