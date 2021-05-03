@@ -1,6 +1,7 @@
 # SocialNetApp
 ![socialNet1](https://user-images.githubusercontent.com/48138763/116908503-45470280-ac43-11eb-97f9-34d688a17763.jpg)
-![socialNet2](https://user-images.githubusercontent.com/48138763/116908702-7f180900-ac43-11eb-9ba7-7c038035f0cf.jpg)
+![socialnet2](https://user-images.githubusercontent.com/48138763/116908963-cef6d000-ac43-11eb-9f0f-ff010e34c584.png)
+
 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.1.3.
