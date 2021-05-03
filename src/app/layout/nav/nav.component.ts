@@ -4,17 +4,15 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from '@app/service/auth.service';
+import { SocialNetSignalRService } from '@app/service/social-net-signal-r.service';
 import { environment } from '@env/*';
 import { UserImagePopUpComponent } from '@shared/component/user-image-pop-up/user-image-pop-up.component';
 import { of, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, startWith, switchMap, takeUntil } from 'rxjs/operators';
+import { INotification, MenuType, NotificationType } from 'src/app/data/nav/schema/nav.schema';
 import { NavService } from 'src/app/data/nav/service/nav.service';
 
- enum MenuType{
- Settings,
- Messages,
- Notifications
-}
+
 
 @Component({
   selector: 'app-nav',
@@ -24,7 +22,7 @@ import { NavService } from 'src/app/data/nav/service/nav.service';
 export class NavComponent implements OnInit, OnDestroy {
 
   formControl = new FormControl();
-  usernames: string[];
+  usernames: string[] = [];
   @ViewChild('searchInput') searchInput: ElementRef;
 
 
@@ -39,11 +37,15 @@ export class NavComponent implements OnInit, OnDestroy {
   currentProfileImage: string;
   defaultProfileImage: string = "../../../assets/images/userIcon.png";
 
+  notifications: INotification[] = [];
+ 
+
   constructor(
     private _navService: NavService,
     private _router: Router,
     private _authService: AuthService,
-    public _matDialog: MatDialog
+    public _matDialog: MatDialog,
+    private _signalRService: SocialNetSignalRService
     ){}
 
   ngOnInit(): void {
@@ -60,12 +62,34 @@ export class NavComponent implements OnInit, OnDestroy {
     });
 
       this.formControl.valueChanges.pipe(
+      takeUntil(this.destroyed$),
       startWith(''),
       distinctUntilChanged(),
       debounceTime(500),
       takeUntil(this.destroyed$),
       switchMap(usernameString => usernameString ? this._navService.getUsernamesByString(usernameString): of([])))
       .subscribe(res => this.usernames = res);
+
+      this._signalRService.getNewPostNotification$()
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(res => {
+        const newPostNotification: INotification = {
+          notificationType: this.notificationType.Post,
+          postId: res.postId,
+          username: res.username
+        }
+        this.notifications.unshift(newPostNotification);
+      });
+      this._signalRService.getNewCommentNotification$()
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(res => {
+        const newCommentNotification: INotification = {
+          notificationType: this.notificationType.Comment,
+          postId: res.postId,
+          username: res.commentOwner
+        }
+        this.notifications.unshift(newCommentNotification);
+      });
   }
 
   ngOnDestroy(): void {
@@ -75,6 +99,10 @@ export class NavComponent implements OnInit, OnDestroy {
   
   public get menuType(): typeof MenuType {
     return MenuType; 
+  }
+
+  public get notificationType(): typeof NotificationType {
+    return NotificationType; 
   }
 
   public onUsernameSelected(event: MatAutocompleteSelectedEvent): void{

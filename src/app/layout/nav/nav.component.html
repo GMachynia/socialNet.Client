@@ -40,8 +40,20 @@
     <div class="nav-links-link" (click)="handleMenu(menuType.Notifications)">
       <mat-icon aria-hidden="false" aria-label="notifications_none">notifications_none</mat-icon>
       <div class="notifications" [ngClass]="{'hide': !notificationsState}">
-        <div class="setting-case">
-         </div>
+   
+          <ng-container *ngFor="let notification of notifications">
+            <ng-container *ngIf="notification.notificationType == notificationType.Post; else commentNotification"> 
+              <div class="notification-item">
+                Nowy post od użytkownika {{notification.username}}
+              </div>
+            </ng-container>
+            <ng-template #commentNotification>
+              <div class="notification-item">
+                Nowy komentarz od użytkownika {{notification.username}}
+              </div>
+            </ng-template>
+          </ng-container>
+
      </div>
     </div>
   </div>

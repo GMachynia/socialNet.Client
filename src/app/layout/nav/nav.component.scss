@@ -148,6 +148,7 @@
     background-color: #000080;
     border-radius: 8px;
     border: 0.25px solid white;
+    overflow-y: auto;
   }
 }
 
@@ -288,4 +289,14 @@
     border: 2px solid white;
   }
 
+}
+
+.notification-item{
+  background-color: blue;
+  height: 30px;
+  width: 100%;
+  font-size: 12px;
+  border-radius: 12px;
+  text-align: center;
+  border: 0.25px solid white;
 }

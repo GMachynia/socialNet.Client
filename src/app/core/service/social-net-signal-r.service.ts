@@ -2,7 +2,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { environment } from '@env/*';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { Observable } from 'rxjs';
-import { IPost } from 'src/app/data/new-post/schema/new-post.schema';
+import { IComment, IPost } from 'src/app/data/new-post/schema/new-post.schema';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -11,7 +11,7 @@ import { AuthService } from './auth.service';
 export class SocialNetSignalRService {
 
   private newPostNotification = new EventEmitter<IPost>();
-  private newCommentNotification = new EventEmitter<any>();
+  private newCommentNotification = new EventEmitter<IComment>();
   private connectionEstablished = new EventEmitter<Boolean>();
   private _hubConnection: HubConnection;
 
@@ -21,7 +21,7 @@ export class SocialNetSignalRService {
     return this.newPostNotification.asObservable();
   }
 
-  public getNewCommentNotification$(): Observable<any>{
+  public getNewCommentNotification$(): Observable<IComment>{
     return this.newCommentNotification.asObservable();
   }
 
@@ -35,7 +35,8 @@ export class SocialNetSignalRService {
 
   public getNewCommentNotification(): void{
     this._hubConnection.on('NewCommentNotification', (data: any) => {
-      this.newCommentNotification.emit(data);
+      const messageObject: IComment = JSON.parse(data);
+      this.newCommentNotification.emit(messageObject);
     });
   }
                       

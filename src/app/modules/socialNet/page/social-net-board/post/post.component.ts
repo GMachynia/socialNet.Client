@@ -16,7 +16,7 @@ export class PostComponent implements OnChanges, OnInit{
   defaultProfilePicture: string = "../../../../../../assets/images/userIcon.png";
   partOfUrl: string = environment.apiUrl + "/";
   postImage: string;
-  commentText: string;
+  commentText: string = '';
   commentOwner: string;
   @Input('post') post: IPost;
   @ViewChild('snText') snText: SnTextareaComponent;
@@ -36,6 +36,9 @@ export class PostComponent implements OnChanges, OnInit{
   }
 
   public sendComment(){
+    if(this.commentText == ''){
+      return;
+    }
     const newComment: INewComment = {
     content: this.commentText,
     postId: this.post.postId

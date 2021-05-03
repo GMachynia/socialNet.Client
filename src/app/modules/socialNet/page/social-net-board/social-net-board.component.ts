@@ -49,8 +49,16 @@ export class SocialNetBoardComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    this._signalRService.getNewPostNotification$().subscribe(res => {
+    this._signalRService.getNewPostNotification$()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(res => {
       this.posts.unshift(res);
+    });
+    this._signalRService.getNewCommentNotification$()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(res => {
+      const post: IPost = this.posts.find(p => p.postId == res.postId);
+      post.comments.push(res);
     });
 
     this.formModel = this._formBuilder.group({
